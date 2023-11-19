@@ -15,7 +15,9 @@ app.use(cors());
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", Router);
-
+app.get("/", (req, res) => {
+  res.send("Welcome to Sufian Mustafa Portfolio (Backend) ");
+});
 const PORT = 8000;
 
 Connection();
