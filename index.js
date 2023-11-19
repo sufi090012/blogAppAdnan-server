@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import morgan from "morgan"; // Import morgan for logging
-
+import mongoose from "mongoose";
 //components
-import Connection from "./database/db.js";
+
 import Router from "./routes/route.js";
 
 dotenv.config();
@@ -21,10 +21,13 @@ app.get("/", (req, res) => {
   res.send("Welcome to blogApp ");
 });
 
-const PORT = 9000;
+const port = process.env.PORT || 5000;
 
-Connection();
-
-app.listen(PORT, () =>
-  console.log(`Server is running successfully on PORT ${PORT}`)
-);
+mongoose
+  .connect(
+    "mongodb://sufi0900:sufi0900@ac-s3hligl-shard-00-00.miah2mi.mongodb.net:27017,ac-s3hligl-shard-00-01.miah2mi.mongodb.net:27017,ac-s3hligl-shard-00-02.miah2mi.mongodb.net:27017/BlogApp_1?ssl=true&replicaSet=atlas-397tbw-shard-0&authSource=admin&retryWrites=true&w=majority"
+  )
+  .then(() => {
+    app.listen(port, () => console.log(`Server running on port ${port}`));
+  })
+  .catch((error) => console.log(`${error} did not connect`));
