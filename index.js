@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to blogApp ");
 });
 
-const PORT = 8000;
+const PORT = 9000;
 
 Connection();
 
