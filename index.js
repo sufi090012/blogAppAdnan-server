@@ -7,10 +7,10 @@ import mongoose from "mongoose";
 //components
 
 import Router from "./routes/route.js";
-
-dotenv.config();
 const app = express();
+dotenv.config();
 
+app.use(morgan("dev"));
 if (process.env.NODE_ENV === "production") {
   // Allow requests from your Netlify frontend domain
   app.use(
@@ -34,14 +34,13 @@ if (process.env.NODE_ENV === "production") {
 app.use(cors());
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("dev")); // Use morgan for logging before defining routes
 app.use("/", Router);
 
 app.get("/", (req, res) => {
   res.send("Welcome to blogApp ");
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 mongoose
   .connect(
